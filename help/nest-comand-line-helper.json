@@ -1,5 +1,8 @@
 {
    "modules": {
       "generate module": "nest g module module_name"
+   },
+   "controllers": {
+      "generate controller": "nest g controller controller_name"
    }
 }
