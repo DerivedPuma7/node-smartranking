@@ -4,5 +4,8 @@
    },
    "controllers": {
       "generate controller": "nest g controller controller_name"
+   },
+   "service": {
+      "generate service": "nest g service service_name"
    }
 }
