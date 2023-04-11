@@ -10,13 +10,10 @@ export class JogadoresService {
   private readonly logger = new Logger(JogadoresService.name);
 
   async criarAtualizarJogador(criarJogadorDto: CriarJogadorDto): Promise<void> {
-    this.logger.log(`criando/atualizando jogador ${criarJogadorDto}`);
-
     const { email } = criarJogadorDto;
     const jogadorEncontrado = this.jogadores.find((jogador) => {
       return jogador.email === email;
     });
-
     if (jogadorEncontrado) {
       this.atualizar(jogadorEncontrado, criarJogadorDto);
     } else {
@@ -54,10 +51,8 @@ export class JogadoresService {
     const jogadorEncontrado = this.jogadores.find((jogador) => {
       return jogador.email === email;
     });
-
-    if (!jogadorEncontrado) {
+    if (!jogadorEncontrado)
       throw new NotFoundException(`Jogador com email ${email} não encontrado`);
-    }
     return jogadorEncontrado;
   }
 
