@@ -32,7 +32,7 @@ export class JogadoresController {
   @UsePipes(ValidationPipe)
   async atualizarJogador(
     @Body() atualizarJogadorDto: AtualizarJogadorDto,
-    @Param('id') id: string,
+    @Param('id', JogadoresValidacaoParametrosPipe) id: string,
   ): Promise<void> {
     await this.jogadoresService.atualizarJogadorPorId(id, atualizarJogadorDto);
   }
@@ -43,12 +43,16 @@ export class JogadoresController {
   }
 
   @Get(':id')
-  async consultarJogadorPorId(@Param('id') id: string): Promise<Jogador> {
+  async consultarJogadorPorId(
+    @Param('id', JogadoresValidacaoParametrosPipe) id: string,
+  ): Promise<Jogador> {
     return await this.jogadoresService.consultarJogadorPorId(id);
   }
 
   @Delete(':id')
-  async deletarJogador(@Param('id') id: string): Promise<void> {
+  async deletarJogador(
+    @Param('id', JogadoresValidacaoParametrosPipe) id: string,
+  ): Promise<void> {
     await this.jogadoresService.deletarJogadorPorId(id);
   }
 }
