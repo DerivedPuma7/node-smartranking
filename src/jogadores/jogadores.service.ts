@@ -10,11 +10,26 @@ export class JogadoresService {
   private readonly logger = new Logger(JogadoresService.name);
 
   async criarAtualizarJogador(criarJogadorDto: CriarJogadorDto): Promise<void> {
-    this.logger.log(`criando jogador ${criarJogadorDto.nome}`);
+    this.logger.log(`criando/atualizando jogador ${criarJogadorDto}`);
 
-    this.criar(criarJogadorDto);
+    const { email } = criarJogadorDto;
+    const jogadorEncontrado = this.jogadores.find((jogador) => {
+      return jogador.email === email;
+    });
 
-    console.log(this.jogadores);
+    if (jogadorEncontrado) {
+      this.atualizar(jogadorEncontrado, criarJogadorDto);
+    } else {
+      this.criar(criarJogadorDto);
+    }
+  }
+
+  private atualizar(
+    jogadorEncontrado: Jogador,
+    criarJogadorDto: CriarJogadorDto,
+  ): void {
+    const { nome } = criarJogadorDto;
+    jogadorEncontrado.nome = nome;
   }
 
   private criar(criarJogadorDto: CriarJogadorDto): void {
