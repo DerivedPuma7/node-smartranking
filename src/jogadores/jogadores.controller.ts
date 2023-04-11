@@ -1,6 +1,7 @@
 import { CriarJogadorDto } from './dtos/criar-jogador.dto';
 import { Jogador } from './interfaces/jogador.interface';
 import { JogadoresService } from './jogadores.service';
+import { JogadoresValidacaoParametrosPipe } from './pipes/jogadores-validacao-parametros.pipe';
 
 import {
   Controller,
@@ -37,7 +38,10 @@ export class JogadoresController {
   }
 
   @Delete()
-  async deletarJogador(@Query('email') email: string): Promise<void> {
+  async deletarJogador(
+    @Query('email', JogadoresValidacaoParametrosPipe) email: string,
+  ): Promise<void> {
+    return;
     await this.jogadoresService.deletarJogadorPorEmail(email);
   }
 }
