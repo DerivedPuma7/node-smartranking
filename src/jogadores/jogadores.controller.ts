@@ -2,13 +2,23 @@ import { CriarJogadorDto } from './dtos/criar-jogador.dto';
 import { Jogador } from './interfaces/jogador.interface';
 import { JogadoresService } from './jogadores.service';
 
-import { Controller, Post, Body, Get, Query, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Query,
+  Delete,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 
 @Controller('api/v1/jogadores')
 export class JogadoresController {
   constructor(private readonly jogadoresService: JogadoresService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   async criarAtualizarJogador(
     @Body() criarJogadorDto: CriarJogadorDto,
   ): Promise<Jogador> {
